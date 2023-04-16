@@ -35,10 +35,37 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of Person
 // Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        match s.len() {
+            0 => <Person as Default>::default(),
+            _ => {
+                let mut csv = s.split(',');
+                let name = csv.next().unwrap().to_string();
+
+                match name.len() {
+                    0 => <Person as Default>::default(),
+                    _ => {
+                        let age = csv.next();
+
+                        if let Some(_) = csv.next() {
+                            return <Person as Default>::default()
+                        }
+
+                        match age {
+                            Some(age) => {
+                                match age.parse() {
+                                    Ok(age) => Person{name, age},
+                                    Err(_) => <Person as Default>::default(),
+                                }
+                            },
+                            None => <Person as Default>::default(),
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
