@@ -4,6 +4,8 @@ use crate::exercise::{Exercise, Mode};
 use crate::verify::test;
 use indicatif::ProgressBar;
 
+// trigger ci
+
 // Invoke the rust compiler on the path of the given exercise,
 // and run the ensuing binary.
 // The verbose argument helps determine whether or not to show
